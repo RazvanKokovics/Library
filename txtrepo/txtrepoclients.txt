@@ -1,0 +1,10 @@
+20,John Wright
+40,Andrei Ivan
+35,Frank Lampard
+78,Gerard Pique
+24,Moussa Dembele
+12,Mohamed Salah
+4,Virgil Van Dijk
+67,Frenkie De Jong
+80,Luuk De Jong
+36,Joshua Kimmich

@@ -1,0 +1,8 @@
+1,1,The Secret Crusade,Oliver Bowden,20,John Wright,2019-10-05,-
+4,4,Still Alice,Lisa Genova,78,Gerard Pique,2019-11-01,-
+5,5,Olive Again,Elizabeth Strout,24,Moussa Dembele,2019-11-07,-
+6,6,The Nightshift Before Christmas,Adam Kay,12,Mohamed Salah,2019-11-09,-
+7,7,The Tales of Beedle the Bard,J K Rowling,4,Virgil Van Dijk,2019-11-15,-
+8,8,This is Going to Hurt,Adam Kay,80,Luuk De Jong,2019-11-17,-
+3,3,The Glass Castle,Jeannette Walls,35,Frank Lampard,2019-10-15,-
+2,2,The Illustrated Man,Ray Bradbury,40,Andrei Ivan,2019-10-07,-
