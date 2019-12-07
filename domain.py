@@ -1,4 +1,5 @@
-
+from datetime import datetime
+from dates import get_date
 #-------------------------------BOOOK-----------------------
 class Book(object):
     
@@ -41,7 +42,15 @@ class Book(object):
     def __str__(self):
         #returns the str format of the book
         return '|{:^5s}|{:<42s}|{:<42s}|'.format(str(self._bookID), self._bookTitle, self._bookAuthor)
-        
+    
+    @staticmethod
+    def read_book(line):
+        parts = line.split(",")
+        return Book(int(parts[0].strip()),parts[1].strip(),parts[2].strip())
+    
+    @staticmethod
+    def write_book(book):
+        return str(book._bookID) + ',' + book._bookTitle + ',' + book._bookAuthor     
 
 #-------------------------------CLIENT-----------------------
 
@@ -79,6 +88,15 @@ class Client(object):
         #returns the str format of the book
         return '|{:^5s}|{:<42s}|'.format(str(self._clientID), self._clientName)
 
+    @staticmethod
+    def read_client(line):
+        parts = line.split(",")
+        return Client(int(parts[0].strip()),parts[1].strip())
+    
+    @staticmethod
+    def write_client(client):
+        return str(client._clientID) + ',' + client._clientName 
+    
 #-------------------------------RENTAL-------------------
 class Rental(object):
     #initializes the rent object
@@ -114,7 +132,22 @@ class Rental(object):
     def __eq__(self, other):
         return self._rentalID == other.rentalID
 
-
+    @staticmethod
+    def read_rental(line):
+        parts = line.split(",")
+        if parts[7].strip() != '-':
+            return Rental(int(parts[0].strip()),Book(int(parts[1].strip()),parts[2].strip(),parts[3].strip()),Client(int(parts[4].strip()),parts[5].strip()),get_date(parts[6].strip()),get_date(parts[7].strip()))
+        else:
+            return Rental(int(parts[0].strip()),Book(int(parts[1].strip()),parts[2].strip(),parts[3].strip()),Client(int(parts[4].strip()),parts[5].strip()),get_date(parts[6].strip()),None)
+    
+    @staticmethod
+    def write_rental(rent):
+        if rent._returnedDate is not None:
+            return str(rent._rentalID) + ',' + str(rent.book.bookID) + ',' + rent.book.bookTitle + ',' + rent.book.bookAuthor + ',' + str(rent.client.clientID) + ',' + rent.client.clientName + ',' + str(rent.rentedDate) + ',' + str(rent.returnedDate)
+        else:
+            return str(rent._rentalID) + ',' + str(rent.book.bookID) + ',' + rent.book.bookTitle + ',' + rent.book.bookAuthor + ',' + str(rent.client.clientID) + ',' + rent.client.clientName + ',' + str(rent.rentedDate) + ',-'
+        
+                
 class RentalDTO(object):
     
     def __init__(self, rentalID, bookTitle, clientName, rentedDate, returnedDate):

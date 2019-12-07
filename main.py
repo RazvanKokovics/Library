@@ -1,26 +1,37 @@
 from ui import Console
 from services import Service
-from repository import RepositoryBooks, RepositoryClients, RepositoryRentals
+
+
+
 from validators import ValidateBook, ValidateClient, ValidateInteger, ValidateRental, ValidateDate
 from domain import Book, Client, Rental
 import datetime
-import unittest
-import tests
-import sqlite3
+from settings import Settings
+
 
 if __name__=="__main__":
     
-    """
-    connection = sqlite3.connect("Library.db")
-
+    #_____________SETTINGS.PROPERTIES____________
+    settings = Settings("settings.properties")
+    f = settings.get_format()
     
-    #REPOS
-    repoBooks = RepositoryBooks("Repobooks:", connection, "Table_Books")
-    print(repoBooks.get_all())
-    """
-    repoClients = RepositoryClients("Repoclients:")
-    repoBooks = RepositoryBooks("Repobooks:")
-    repoRental = RepositoryRentals("Reporentals:")
+    if f == "INMEMORY":
+        from repository import RepositoryBooks, RepositoryClients, RepositoryRentals
+        repoClients = RepositoryClients("Repoclients:")
+        repoBooks = RepositoryBooks("Repobooks:")
+        repoRental = RepositoryRentals("Reporentals:")
+    elif f == "TEXTFILES":
+        from textrepository import RepositoryBooks, RepositoryClients, RepositoryRentals
+        files = settings.get_txt()
+        repoBooks = RepositoryBooks("Repobooks:", files[0], Book.read_book, Book.write_book)
+        repoClients = RepositoryClients("Repoclients:", files[1], Client.read_client, Client.write_client)
+        repoRental = RepositoryRentals("Reporentals:", files[2], Rental.read_rental, Rental.write_rental)
+    elif f == "":
+        pass
+    
+           
+    #____________________________________________
+    
     
     
     #VALIDATORS
@@ -36,7 +47,8 @@ if __name__=="__main__":
     
     validatorInteger = ValidateInteger()
     validatorDate = ValidateDate()
-
+    
+    
     #hard-generate
     #________________BOOKS______________________________________________________
     repoBooks.add(Book(1, "The Secret Crusade", "Oliver Bowden"))
@@ -64,24 +76,14 @@ if __name__=="__main__":
     
     repoRental.add(Rental(1, Book(1, "The Secret Crusade", "Oliver Bowden"), Client(20, "John Wright"), datetime.date(2019, 10, 5), None))
     repoRental.add(Rental(2, Book(2, "The Illustrated Man", "Ray Bradbury"), Client(40, "Andrei Ivan"), datetime.date(2019, 10, 7), None))
+    
     repoRental.add(Rental(3, Book(3, "The Glass Castle", "Jeannette Walls"), Client(35, "Frank Lampard"), datetime.date(2019, 10, 15), None))
     repoRental.add(Rental(4, Book(4, "Still Alice", "Lisa Genova"), Client(78, "Gerard Pique"), datetime.date(2019, 11, 1), None))
-    repoRental.add(Rental(5, Book(5, "Olive, Again", "Elizabeth Strout"), Client(24, "Moussa Dembele"), datetime.date(2019, 11, 7), None))
+    repoRental.add(Rental(5, Book(5, "Olive Again", "Elizabeth Strout"), Client(24, "Moussa Dembele"), datetime.date(2019, 11, 7), None))
     repoRental.add(Rental(6, Book(6, "The Nightshift Before Christmas", "Adam Kay"), Client(12, "Mohamed Salah"), datetime.date(2019, 11, 9), None))
     repoRental.add(Rental(7, Book(7, "The Tales of Beedle the Bard", "J K Rowling"), Client(4, "Virgil Van Dijk"), datetime.date(2019, 11, 15), None))
     repoRental.add(Rental(8, Book(8, "This is Going to Hurt", "Adam Kay"), Client(80, "Luuk De Jong"), datetime.date(2019, 11, 17), None))
-
-    suite = unittest.TestLoader().loadTestsFromModule(tests)
-    #unittest.TextTestRunner(verbosity=2).run(suite)
-    
     
     c = Console(Srv, validatorInteger, validatorDate)
     c.run()
-
-
-
-
-
-
-
-
+    
