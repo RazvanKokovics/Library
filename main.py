@@ -26,8 +26,12 @@ if __name__=="__main__":
         repoBooks = RepositoryBooks("Repobooks:", files[0], Book.read_book, Book.write_book)
         repoClients = RepositoryClients("Repoclients:", files[1], Client.read_client, Client.write_client)
         repoRental = RepositoryRentals("Reporentals:", files[2], Rental.read_rental, Rental.write_rental)
-    elif f == "":
-        pass
+    elif f == "BYNARYFILES":
+        from picklerepository import RepositoryBooks, RepositoryClients, RepositoryRentals
+        files = settings.get_bynary()
+        repoBooks = RepositoryBooks("Repobooks:", files[0])
+        repoClients = RepositoryClients("Repoclients:", files[1])
+        repoRental = RepositoryRentals("Reporentals:", files[2])
     
            
     #____________________________________________
