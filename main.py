@@ -7,14 +7,14 @@ from validators import ValidateBook, ValidateClient, ValidateInteger, ValidateRe
 from domain import Book, Client, Rental
 import datetime
 from settings import Settings
-
+from sqlrepository import SQLRepo
 
 if __name__=="__main__":
     
     #_____________SETTINGS.PROPERTIES____________
     settings = Settings("settings.properties")
     f = settings.get_format()
-    
+    """
     if f == "INMEMORY":
         from repository import RepositoryBooks, RepositoryClients, RepositoryRentals
         repoClients = RepositoryClients("Repoclients:")
@@ -32,11 +32,13 @@ if __name__=="__main__":
         repoBooks = RepositoryBooks("Repobooks:", files[0])
         repoClients = RepositoryClients("Repoclients:", files[1])
         repoRental = RepositoryRentals("Reporentals:", files[2])
-    
+    """
+    repo = SQLRepo("Nume")
+    repo.cmd()
            
     #____________________________________________
     
-    
+    """
     
     #VALIDATORS
     validatorBooks = ValidateBook()
@@ -90,4 +92,4 @@ if __name__=="__main__":
     
     c = Console(Srv, validatorInteger, validatorDate)
     c.run()
-    
+    """
