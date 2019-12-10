@@ -212,9 +212,9 @@ class RepositoryRentals(SQLRepo):
         line = self._cursor.fetchone()
         while line is not None:
             if line[4] is not None:
-                obj = Rental(int(line[0]), Book(int(line[1]), None, None), Client(int(line[2]), None), datetime.date(line[3]), datetime.date(line[4]))
+                obj = Rental(int(line[0]), Book(int(line[1]), None, None), Client(int(line[2]), None), datetime.datetime.strptime(line[3], '%Y-%m-%d').date(), datetime.datetime.strptime(line[4], '%Y-%m-%d').date())
             else:
-                obj = Rental(int(line[0]), Book(int(line[1]), None, None), Client(int(line[2]), None), line[3], None)
+                obj = Rental(int(line[0]), Book(int(line[1]), None, None), Client(int(line[2]), None), datetime.datetime.strptime(line[3], '%Y-%m-%d').date(), None)
             self._entities.append(obj)
             line = self._cursor.fetchone()
     
@@ -233,9 +233,9 @@ class RepositoryRentals(SQLRepo):
         if line is not None:
             raise RepositoryError(self._name + " Existing ID!\n")
         if obj.returnedDate is not None:
-            cmd = 'INSERT INTO ' + self._table_name + " VALUES ("+ str(obj.rentalID) + "," + str(obj.book.bookID) + "," + str(obj.client.clientID) + "," + str(obj.rentedDate) + "," + str(obj.returnedDate) + ");"
+            cmd = 'INSERT INTO ' + self._table_name + " VALUES ("+ str(obj.rentalID) + "," + str(obj.book.bookID) + "," + str(obj.client.clientID) + ",'" + str(obj.rentedDate) + "','" + str(obj.returnedDate) + "');"
         else:
-            cmd = 'INSERT INTO ' + self._table_name + " VALUES ("+ str(obj.rentalID) + "," + str(obj.book.bookID) + "," + str(obj.client.clientID) + "," + str(obj.rentedDate) + ", NULL " + ");"
+            cmd = 'INSERT INTO ' + self._table_name + " VALUES ("+ str(obj.rentalID) + "," + str(obj.book.bookID) + "," + str(obj.client.clientID) + ",'" + str(obj.rentedDate) + "', NULL " + ");"
         self._cursor.execute(cmd)
         self._conn.commit()
         
@@ -249,9 +249,9 @@ class RepositoryRentals(SQLRepo):
         if line is None:
             raise RepositoryError(self._name + " Inexistent ID!\n")
         if line[4] is not None:
-            obj = Rental(int(line[0]), Book(int(line[1]), None, None), Client(int(line[2]), None), datetime.date(line[3]), datetime.date(line[4]))
+            obj = Rental(int(line[0]), Book(int(line[1]), None, None), Client(int(line[2]), None), datetime.datetime.strptime(line[3], '%Y-%m-%d').date(), datetime.datetime.strptime(line[4], '%Y-%m-%d').date())
         else:
-            obj = Rental(int(line[0]), Book(int(line[1]), None, None), Client(int(line[2]), None), datetime.date(line[3]), None)
+            obj = Rental(int(line[0]), Book(int(line[1]), None, None), Client(int(line[2]), None), datetime.datetime.strptime(line[3], '%Y-%m-%d').date(), None)
         return obj
         
     def remove(self, obj):
@@ -266,7 +266,10 @@ class RepositoryRentals(SQLRepo):
         #updates an object from the repo
         #raises a RepositoryError if the object does not exist
         b = self.search(obj)
-        cmd = "UPDATE " + self._table_name + " SET Returned = " + str(obj.returnedDate) + " WHERE Id=" + str(obj.rentalID) + ";"
+        if obj.returnedDate is not None:
+            cmd = "UPDATE " + self._table_name + " SET Returned = '" + str(obj.returnedDate) + "' WHERE Id=" + str(obj.rentalID) + ";"
+        else:
+            cmd = "UPDATE " + self._table_name + " SET Returned = NULL WHERE Id=" + str(obj.rentalID) + ";"
         self._cursor.execute(cmd)
         self._conn.commit()
         
