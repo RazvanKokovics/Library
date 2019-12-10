@@ -28,6 +28,7 @@ class FileRepo():
     
     def size(self):
         #returns the size of the repo
+        self.read_all()
         return len(self._entities)
     
     def add(self, obj):

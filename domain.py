@@ -52,6 +52,14 @@ class Book(object):
     def write_book(book):
         return str(book._bookID) + ',' + book._bookTitle + ',' + book._bookAuthor     
 
+    @staticmethod
+    def read_sql(line):
+        return Book(int(line[0]), line[1], line[2])
+    
+    @staticmethod
+    def write_sql(book):
+        return ' (Id, Title, Author) VALUES ' + "(" + str(book._bookID) + ", '" + book._bookTitle + "','" + book._bookAuthor + "')"     
+
 #-------------------------------CLIENT-----------------------
 
 
@@ -97,6 +105,14 @@ class Client(object):
     def write_client(client):
         return str(client._clientID) + ',' + client._clientName 
     
+    @staticmethod
+    def read_sql(line):
+        return Client(int(line[0]), line[1])
+    
+    @staticmethod
+    def write_sql(client):
+        return ' (Id, Name) VALUES ' + "(" + str(client._clientID) + ", '" + client._clientName + "')"     
+
 #-------------------------------RENTAL-------------------
 class Rental(object):
     #initializes the rent object
@@ -147,7 +163,14 @@ class Rental(object):
         else:
             return str(rent._rentalID) + ',' + str(rent.book.bookID) + ',' + rent.book.bookTitle + ',' + rent.book.bookAuthor + ',' + str(rent.client.clientID) + ',' + rent.client.clientName + ',' + str(rent.rentedDate) + ',-'
         
-                
+    @staticmethod
+    def read_sql(line):
+        return Rental(int(line[0]), line[1])
+    
+    @staticmethod
+    def write_sql(rental):
+        return ' (Id, Name) VALUES ' + "(" + str(rental._clientID) + ", '" + rental._clientName + "')"     
+       
 class RentalDTO(object):
     
     def __init__(self, rentalID, bookTitle, clientName, rentedDate, returnedDate):
