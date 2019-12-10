@@ -56,7 +56,7 @@ class FileRepo():
         while i < self.size():
             if self._entities[i] == obj:
                 del self._entities[i] 
-                self.write_all()
+                self.write_bin_all()
                 return
             i = i + 1
         if y == self.size():
@@ -69,7 +69,7 @@ class FileRepo():
         for i in range(len(self._entities)):
             if self._entities[i] == obj:
                 self._entities[i] = obj
-                self.write_all()
+                self.write_bin_all()
                 return
         raise RepositoryError(self._name + " Inexistend ID!\n")
         

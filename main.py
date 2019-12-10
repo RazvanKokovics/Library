@@ -35,9 +35,9 @@ if __name__=="__main__":
     elif f == "SQLDATABASE":
         from sqlrepository import RepositoryBooks, RepositoryClients, RepositoryRentals
         files = settings.get_sql()
-        repoBooks = RepositoryBooks("Repobooks:", files[0], Book.read_sql, Book.write_sql)
-        repoClients = RepositoryClients("Repoclients:", files[1], Client.read_sql, Client.write_sql)
-        repoRentals = RepositoryRentals("Reporentals:", files[2], Rental.read_sql, Rental.write_sql)
+        repoBooks = RepositoryBooks("Repobooks:", files[0])
+        repoClients = RepositoryClients("Repoclients:", files[1])
+        repoRental = RepositoryRentals("Reporentals:", files[2])
     
            
     #____________________________________________
@@ -84,10 +84,11 @@ if __name__=="__main__":
     repoClients.add(Client(36, "Joshua Kimmich"))
     #____________________________________________________________________________
     
+    
     repoRental.add(Rental(1, Book(1, "The Secret Crusade", "Oliver Bowden"), Client(20, "John Wright"), datetime.date(2019, 10, 5), None))
     repoRental.add(Rental(2, Book(2, "The Illustrated Man", "Ray Bradbury"), Client(40, "Andrei Ivan"), datetime.date(2019, 10, 7), None))
     
-    repoRental.add(Rental(3, Book(3, "The Glass Castle", "Jeannette Walls"), Client(35, "Frank Lampard"), datetime.date(2019, 10, 15), None))
+    #repoRental.add(Rental(3, Book(3, "The Glass Castle", "Jeannette Walls"), Client(35, "Frank Lampard"), datetime.date(2019, 10, 15), None))
     repoRental.add(Rental(4, Book(4, "Still Alice", "Lisa Genova"), Client(78, "Gerard Pique"), datetime.date(2019, 11, 1), None))
     repoRental.add(Rental(5, Book(5, "Olive Again", "Elizabeth Strout"), Client(24, "Moussa Dembele"), datetime.date(2019, 11, 7), None))
     repoRental.add(Rental(6, Book(6, "The Nightshift Before Christmas", "Adam Kay"), Client(12, "Mohamed Salah"), datetime.date(2019, 11, 9), None))
