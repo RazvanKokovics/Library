@@ -1,5 +1,5 @@
 #import pymssql
-import pyodbc
+#import pyodbc
 from exceptions import RepositoryError
 import datetime
 from domain import Book, Client, Rental

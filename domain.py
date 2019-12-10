@@ -52,6 +52,9 @@ class Book(object):
     def write_book(book):
         return str(book._bookID) + ',' + book._bookTitle + ',' + book._bookAuthor     
 
+    @staticmethod
+    def as_obj(book):
+        return Book(book['BOOK_ID'], book['BOOK_TITLE'], book['BOOK_AUTHOR'])
 #-------------------------------CLIENT-----------------------
 
 
@@ -97,6 +100,9 @@ class Client(object):
     def write_client(client):
         return str(client._clientID) + ',' + client._clientName 
     
+    @staticmethod
+    def as_obj(client):
+        return Client(client['CLIENT_ID'], client['CLIENT_NAME'])
 #-------------------------------RENTAL-------------------
 class Rental(object):
     #initializes the rent object
@@ -146,6 +152,10 @@ class Rental(object):
             return str(rent._rentalID) + ',' + str(rent.book.bookID) + ',' + rent.book.bookTitle + ',' + rent.book.bookAuthor + ',' + str(rent.client.clientID) + ',' + rent.client.clientName + ',' + str(rent.rentedDate) + ',' + str(rent.returnedDate)
         else:
             return str(rent._rentalID) + ',' + str(rent.book.bookID) + ',' + rent.book.bookTitle + ',' + rent.book.bookAuthor + ',' + str(rent.client.clientID) + ',' + rent.client.clientName + ',' + str(rent.rentedDate) + ',-'
+    
+    @staticmethod
+    def as_obj(rental):
+        return Rental(rental['RENTAL_ID'], Book(rental['BOOK_ID'], None, None), Client(rental['CLIENT_ID'], None), rental['RENTED_DATE'], rental['RETURNED_DATE']) 
         
 class RentalDTO(object):
     

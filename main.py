@@ -7,7 +7,7 @@ from validators import ValidateBook, ValidateClient, ValidateInteger, ValidateRe
 from domain import Book, Client, Rental
 import datetime
 from settings import Settings
-from sqlrepository import SQLRepo
+#from sqlrepository import SQLRepo
 
 if __name__=="__main__":
     
@@ -28,6 +28,12 @@ if __name__=="__main__":
         repoRental = RepositoryRentals("Reporentals:", files[2], Rental.read_rental, Rental.write_rental)
     elif f == "BYNARYFILES":
         from picklerepository import RepositoryBooks, RepositoryClients, RepositoryRentals
+        files = settings.get_bynary()
+        repoBooks = RepositoryBooks("Repobooks:", files[0])
+        repoClients = RepositoryClients("Repoclients:", files[1])
+        repoRental = RepositoryRentals("Reporentals:", files[2])
+    elif f == "JSONFILES":
+        from jsonrepository import RepositoryBooks, RepositoryClients, RepositoryRentals
         files = settings.get_bynary()
         repoBooks = RepositoryBooks("Repobooks:", files[0])
         repoClients = RepositoryClients("Repoclients:", files[1])
@@ -58,7 +64,7 @@ if __name__=="__main__":
     validatorInteger = ValidateInteger()
     validatorDate = ValidateDate()
     
-    """
+    
     #hard-generate
     #________________BOOKS______________________________________________________
     repoBooks.add(Book(1, "The Secret Crusade", "Oliver Bowden"))
@@ -84,7 +90,7 @@ if __name__=="__main__":
     repoClients.add(Client(36, "Joshua Kimmich"))
     #____________________________________________________________________________
     
-    
+    """
     repoRental.add(Rental(1, Book(1, "The Secret Crusade", "Oliver Bowden"), Client(20, "John Wright"), datetime.date(2019, 10, 5), None))
     repoRental.add(Rental(2, Book(2, "The Illustrated Man", "Ray Bradbury"), Client(40, "Andrei Ivan"), datetime.date(2019, 10, 7), None))
     
