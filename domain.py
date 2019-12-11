@@ -51,10 +51,10 @@ class Book(object):
     @staticmethod
     def write_book(book):
         return str(book._bookID) + ',' + book._bookTitle + ',' + book._bookAuthor     
-
+    
     @staticmethod
     def as_obj(book):
-        return Book(book['BOOK_ID'], book['BOOK_TITLE'], book['BOOK_AUTHOR'])
+        return Book(book['_bookID'], book['_bookTitle'], book['_bookAuthor'])
 #-------------------------------CLIENT-----------------------
 
 
@@ -102,14 +102,16 @@ class Client(object):
     
     @staticmethod
     def as_obj(client):
-        return Client(client['CLIENT_ID'], client['CLIENT_NAME'])
+        return Client(client['_clientID'], client['_clientName'])
 #-------------------------------RENTAL-------------------
 class Rental(object):
     #initializes the rent object
     def __init__(self, rentalID, book, client, rentedDate, returnedDate):
         self._rentalID = int(rentalID)
         self._book = book
+        self._bid = int(book.bookID)
         self._client = client
+        self._cid = int(client.clientID)
         self._rentedDate = rentedDate
         self._returnedDate = returnedDate
     
@@ -155,7 +157,14 @@ class Rental(object):
     
     @staticmethod
     def as_obj(rental):
-        return Rental(rental['RENTAL_ID'], Book(rental['BOOK_ID'], None, None), Client(rental['CLIENT_ID'], None), rental['RENTED_DATE'], rental['RETURNED_DATE']) 
+        #print(rental)
+        #print(rental['_returnedDate'])
+        #if rental['_returnedDate'] is not None:
+        #print(rental)
+        if rental.get('_returnedDate') is not None:
+            return Rental(rental.get('_rentalID'), Book(rental.get('_bid'), None, None), Client(rental.get('_cid'), None), datetime.datetime.strptime(rental.get('_rentedDate').get('_year')+rental.get('_rentedDate').get('_month')+rental.get('_rentedDate').get('_day'), '%Y%m%d').date(), datetime.datetime.strptime(rental.get('_returnedDate').get('_year')+rental.get('_returnedDate').get('_month')+rental.get('_returnedDate').get('_day'), '%Y%m%d').date()) 
+        else:
+            return Rental(rental.get('_rentalID'), Book(rental.get('_bid'), None, None), Client(rental.get('_cid'), None), datetime.datetime.strptime(rental.get('_rentedDate').get('_year')+rental.get('_rentedDate').get('_month')+rental.get('_rentedDate').get('_day'), '%Y%m%d').date(), None) 
         
 class RentalDTO(object):
     

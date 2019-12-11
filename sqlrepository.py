@@ -1,5 +1,5 @@
 #import pymssql
-#import pyodbc
+import pyodbc
 from exceptions import RepositoryError
 import datetime
 from domain import Book, Client, Rental
@@ -48,7 +48,7 @@ class RepositoryBooks(SQLRepo):
         line = self._cursor.fetchone()
         if line is not None:
             raise RepositoryError(self._name + " Existing ID!\n")
-        cmd = 'INSERT INTO ' + self._table_name + " VALUES ("+ str(obj.bookID) + ",'" + obj.bookTitle + "'," + obj.bookAuthor  + "');"
+        cmd = 'INSERT INTO ' + self._table_name + " VALUES ("+ str(obj.bookID) + ",'" + obj.bookTitle + "','" + obj.bookAuthor  + "');"
         self._cursor.execute(cmd)
         self._conn.commit()
         

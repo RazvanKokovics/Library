@@ -34,10 +34,10 @@ if __name__=="__main__":
         repoRental = RepositoryRentals("Reporentals:", files[2])
     elif f == "JSONFILES":
         from jsonrepository import RepositoryBooks, RepositoryClients, RepositoryRentals
-        files = settings.get_bynary()
-        repoBooks = RepositoryBooks("Repobooks:", files[0])
-        repoClients = RepositoryClients("Repoclients:", files[1])
-        repoRental = RepositoryRentals("Reporentals:", files[2])
+        files = settings.get_json()
+        repoBooks = RepositoryBooks("Repobooks:", files[0], Book)
+        repoClients = RepositoryClients("Repoclients:", files[1], Client)
+        repoRental = RepositoryRentals("Reporentals:", files[2], Rental)
     elif f == "SQLDATABASE":
         from sqlrepository import RepositoryBooks, RepositoryClients, RepositoryRentals
         files = settings.get_sql()
@@ -64,7 +64,7 @@ if __name__=="__main__":
     validatorInteger = ValidateInteger()
     validatorDate = ValidateDate()
     
-    
+    """
     #hard-generate
     #________________BOOKS______________________________________________________
     repoBooks.add(Book(1, "The Secret Crusade", "Oliver Bowden"))
@@ -77,6 +77,7 @@ if __name__=="__main__":
     repoBooks.add(Book(8, "This is Going to Hurt", "Adam Kay"))
     repoBooks.add(Book(9, "Old new", "Oliver Bowden"))
     repoBooks.add(Book(10, "Quidditch Through the Ages", "J K Rowling"))
+    
     #________________CLIENTS____________________________________________________
     repoClients.add(Client(20, "John Wright"))
     repoClients.add(Client(40, "Andrei Ivan"))
@@ -90,7 +91,7 @@ if __name__=="__main__":
     repoClients.add(Client(36, "Joshua Kimmich"))
     #____________________________________________________________________________
     
-    """
+    
     repoRental.add(Rental(1, Book(1, "The Secret Crusade", "Oliver Bowden"), Client(20, "John Wright"), datetime.date(2019, 10, 5), None))
     repoRental.add(Rental(2, Book(2, "The Illustrated Man", "Ray Bradbury"), Client(40, "Andrei Ivan"), datetime.date(2019, 10, 7), None))
     

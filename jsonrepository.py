@@ -5,13 +5,31 @@ from domain import Book, Client, Rental
 
 class JsonRepo():
     
-    def __init__(self, Name, filename):
+    def __init__(self, Name, filename, className):
         self._name = Name
         self._filename = filename
+        self._classname = className
         self._entities = []
     
+    def read_bin_all(self):
+        self._entities = []
+        with open(self._filename) as f:
+            json_string = json.dumps(json.load(f), default=self.obj_to_dict, indent=2)
+            self._entities = json.loads(json_string, object_hook=self._classname.as_obj)
+    
+    def write_bin_all(self):
+        with open(self._filename, 'w') as f:
+            json_string = json.dumps(self._entities, default=self.obj_to_dict, indent=2)
+            f.write(json_string)
+        
     def obj_to_dict(self, obj):
-        return obj.__dict__
+        if isinstance(obj, datetime.date):
+            return {"_day" : str(obj.day),
+                    "_month" : str(obj.month),
+                    "_year" : str(obj.year)
+                    }
+        else:
+            return obj.__dict__
     
     def size(self):
         #returns the size of the repo
@@ -71,23 +89,6 @@ class JsonRepo():
     
 class RepositoryBooks(JsonRepo):
     
-    def read_bin_all(self):
-        self._entities = []
-        try:
-            f = open(self._filename, 'r')
-            json_string = json.dumps(json.load(f), default=self.obj_to_dict, indent=2)
-            self._entities = json.load(json_string, object_hook=Book.as_obj)
-        except Exception:
-            self._entities = []
-    
-    def write_bin_all(self):
-        try:
-            f = open(self._filename, 'w')
-            json_string = json.dumps(self._entities, default=self.obj_to_dict, indent=2)
-            f.write(json_string)
-        except Exception:
-            pass
-    
     def searchBookId(self, bookId):
         self.read_bin_all()
         l = []
@@ -135,23 +136,6 @@ class RepositoryBooks(JsonRepo):
             
         
 class RepositoryClients(JsonRepo):
-    
-    def read_bin_all(self):
-        self._entities = []
-        try:
-            f = open(self._filename, 'r', encoding='ISO-8859-1')
-            json_string = json.dumps(json.load(f), default=self.obj_to_dict, indent=2)
-            self._entities = json.load(json_string, object_hook=Book.as_obj)
-        except Exception:
-            self._entities = []
-    
-    def write_bin_all(self):
-        try:
-            f = open(self._filename, 'wb')
-            json_string = json.dumps(self._entities, default=self.obj_to_dict, indent=2)
-            f.write(json_string)
-        except Exception:
-            pass
         
     def searchClientId(self, clientId):
         self.read_bin_all()
@@ -177,23 +161,6 @@ class RepositoryClients(JsonRepo):
 
 
 class RepositoryRentals(JsonRepo):
-    
-    def read_bin_all(self):
-        self._entities = []
-        try:
-            f = open(self._filename, 'r', encoding='ISO-8859-1')
-            json_string = json.dumps(json.load(f), default=self.obj_to_dict, indent=2)
-            self._entities = json.load(json_string, object_hook=Book.as_obj)
-        except Exception:
-            self._entities = []
-    
-    def write_bin_all(self):
-        try:
-            f = open(self._filename, 'wb')
-            json_string = json.dumps(self._entities, default=self.obj_to_dict, indent=2)
-            f.write(json_string)
-        except Exception:
-            pass
         
     def search_unique(self, keyobj):
         self.read_bin_all()
