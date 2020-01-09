@@ -1,11 +1,12 @@
 from exceptions import RepositoryError
+from dynamicArray import DynamicArray
 import datetime
 
 class Repo(object):
     
     def __init__(self, Name):
         self._name = Name
-        self._entities = []
+        self._entities = DynamicArray()
         
     def size(self):
         #returns the size of the repo

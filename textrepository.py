@@ -1,5 +1,6 @@
 from exceptions import RepositoryError
 import datetime
+from dynamicArray import DynamicArray
 
 class FileRepo():
     
@@ -8,10 +9,10 @@ class FileRepo():
         self._filename = filename
         self._read_object = read_object
         self._write_object = write_object
-        self._entities = []
+        self._entities = DynamicArray()
     
     def read_all(self):
-        self._entities = []
+        self._entities = DynamicArray()
         with open(self._filename, "r") as f:
             lines = f.readlines()
             for line in lines:

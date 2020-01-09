@@ -2,6 +2,7 @@ from exceptions import RepositoryError
 import datetime
 import json
 from domain import Book, Client, Rental
+from dynamicArray import DynamicArray
 
 class JsonRepo():
     
@@ -9,10 +10,10 @@ class JsonRepo():
         self._name = Name
         self._filename = filename
         self._classname = className
-        self._entities = []
+        self._entities = DynamicArray()
     
     def read_bin_all(self):
-        self._entities = []
+        self._entities = DynamicArray()
         with open(self._filename) as f:
             json_string = json.dumps(json.load(f), default=self.obj_to_dict, indent=2)
             self._entities = json.loads(json_string, object_hook=self._classname.as_obj)

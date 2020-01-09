@@ -1,21 +1,22 @@
 from exceptions import RepositoryError
 import datetime
 import pickle
+from dynamicArray import DynamicArray
 
 class FileRepo():
     
     def __init__(self, Name, filename):
         self._name = Name
         self._filename = filename
-        self._entities = []
+        self._entities = DynamicArray()
     
     def read_bin_all(self):
-        self._entities = []
+        self._entities = DynamicArray()
         try:
             f = open(self._filename, 'rb')
             self._entities = pickle.load(f)
         except EOFError:
-            self._entities = []
+            self._entities = DynamicArray()
     
     def write_bin_all(self):
         f = open(self._filename, 'wb')

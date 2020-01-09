@@ -3,6 +3,7 @@ import pyodbc
 from exceptions import RepositoryError
 import datetime
 from domain import Book, Client, Rental
+from dynamicArray import DynamicArray
 
 class SQLRepo():
     
@@ -12,7 +13,7 @@ class SQLRepo():
         self._cursor = self._conn.cursor()
         self._name = Name
         self._table_name = Table_Name
-        self._entities = []
+        self._entities = DynamicArray()
             
     def size(self):
         #the size of the sql table
@@ -25,7 +26,7 @@ class RepositoryBooks(SQLRepo):
     
     def read_data(self):
         #reads all the data from the sql table
-        self._entities = []
+        self._entities = DynamicArray()
         cmd = 'SELECT * FROM ' + self._table_name
         self._cursor.execute(cmd)
         line = self._cursor.fetchone()
