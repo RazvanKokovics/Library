@@ -1,0 +1,142 @@
+[
+  {
+    "_rentalID": 1,
+    "_book": {
+      "_bookID": 1,
+      "_bookTitle": "The Secret Crusade",
+      "_bookAuthor": "Oliver Bowden"
+    },
+    "_bid": 1,
+    "_client": {
+      "_clientID": 20,
+      "_clientName": "John Wright"
+    },
+    "_cid": 20,
+    "_rentedDate": {
+      "_day": "5",
+      "_month": "10",
+      "_year": "2019"
+    },
+    "_returnedDate": null
+  },
+  {
+    "_rentalID": 2,
+    "_book": {
+      "_bookID": 2,
+      "_bookTitle": "The Illustrated Man",
+      "_bookAuthor": "Ray Bradbury"
+    },
+    "_bid": 2,
+    "_client": {
+      "_clientID": 40,
+      "_clientName": "Andrei Ivan"
+    },
+    "_cid": 40,
+    "_rentedDate": {
+      "_day": "7",
+      "_month": "10",
+      "_year": "2019"
+    },
+    "_returnedDate": null
+  },
+  {
+    "_rentalID": 4,
+    "_book": {
+      "_bookID": 4,
+      "_bookTitle": "Still Alice",
+      "_bookAuthor": "Lisa Genova"
+    },
+    "_bid": 4,
+    "_client": {
+      "_clientID": 78,
+      "_clientName": "Gerard Pique"
+    },
+    "_cid": 78,
+    "_rentedDate": {
+      "_day": "1",
+      "_month": "11",
+      "_year": "2019"
+    },
+    "_returnedDate": null
+  },
+  {
+    "_rentalID": 5,
+    "_book": {
+      "_bookID": 5,
+      "_bookTitle": "Olive Again",
+      "_bookAuthor": "Elizabeth Strout"
+    },
+    "_bid": 5,
+    "_client": {
+      "_clientID": 24,
+      "_clientName": "Moussa Dembele"
+    },
+    "_cid": 24,
+    "_rentedDate": {
+      "_day": "7",
+      "_month": "11",
+      "_year": "2019"
+    },
+    "_returnedDate": null
+  },
+  {
+    "_rentalID": 6,
+    "_book": {
+      "_bookID": 6,
+      "_bookTitle": "The Nightshift Before Christmas",
+      "_bookAuthor": "Adam Kay"
+    },
+    "_bid": 6,
+    "_client": {
+      "_clientID": 12,
+      "_clientName": "Mohamed Salah"
+    },
+    "_cid": 12,
+    "_rentedDate": {
+      "_day": "9",
+      "_month": "11",
+      "_year": "2019"
+    },
+    "_returnedDate": null
+  },
+  {
+    "_rentalID": 7,
+    "_book": {
+      "_bookID": 7,
+      "_bookTitle": "The Tales of Beedle the Bard",
+      "_bookAuthor": "J K Rowling"
+    },
+    "_bid": 7,
+    "_client": {
+      "_clientID": 4,
+      "_clientName": "Virgil Van Dijk"
+    },
+    "_cid": 4,
+    "_rentedDate": {
+      "_day": "15",
+      "_month": "11",
+      "_year": "2019"
+    },
+    "_returnedDate": null
+  },
+  {
+    "_rentalID": 8,
+    "_book": {
+      "_bookID": 8,
+      "_bookTitle": "This is Going to Hurt",
+      "_bookAuthor": "Adam Kay"
+    },
+    "_bid": 8,
+    "_client": {
+      "_clientID": 80,
+      "_clientName": "Luuk De Jong"
+    },
+    "_cid": 80,
+    "_rentedDate": {
+      "_day": "17",
+      "_month": "11",
+      "_year": "2019"
+    },
+    "_returnedDate": null
+  }
+]
