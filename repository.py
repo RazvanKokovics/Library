@@ -57,32 +57,40 @@ class Repo(object):
         return self._entities
 
 class RepositoryBooks(Repo):
-    
+
     def searchBookId(self, bookId):
-        l = []
-        for book in self._entities:
+        def same_id(book):
             if str(book.bookID).find(str(bookId)) != -1:
-                l.append(book)
+                return True
+            else:
+                return False
+        l = self._entities.filter(same_id)
         if len(l) > 0:
             return l
         else:
             raise RepositoryError(self._name + " No matching books were found!\n")
 
     def searchBookAuthor(self, bookAuthor):
-        l = []
-        for book in self._entities:
+        def same_book(book):
             if book.bookAuthor.lower().find(bookAuthor.lower()) != -1:
-                l.append(book)
+                return True
+            else:
+                return False
+            
+        l = self._entities.filter(same_book)
         if len(l) > 0:
             return l
         else:
             raise RepositoryError(self._name + " No matching books were found!\n")
 
     def searchBookTitle(self, bookTitle):
-        l = []
-        for book in self._entities:
+        
+        def same_title(book):
             if book.bookTitle.lower().find(bookTitle.lower()) != -1:
-                l.append(book)
+                return True
+            else:
+                return False
+        l = self._entities.filter(same_title)
         if len(l) > 0:
             return l
         else:

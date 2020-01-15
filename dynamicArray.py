@@ -104,9 +104,9 @@ class DynamicArray():
         #acceptanceFunction = the function that checks if an element passes the filter
         #returns a list with all the elements that pass the given filter
         filteredList = []
-        for element in self._elem:
-            if acceptanceFunction(element):
-                filteredList.append(element)
+        for i in range(self._current):
+            if acceptanceFunction(self._elem[i]):
+                filteredList.append(self._elem[i])
         return filteredList
                 
         

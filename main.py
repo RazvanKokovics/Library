@@ -64,7 +64,7 @@ if __name__=="__main__":
     validatorInteger = ValidateInteger()
     validatorDate = ValidateDate()
     
-    """
+    
     #hard-generate
     #________________BOOKS______________________________________________________
     repoBooks.add(Book(1, "The Secret Crusade", "Oliver Bowden"))
@@ -101,7 +101,7 @@ if __name__=="__main__":
     repoRental.add(Rental(6, Book(6, "The Nightshift Before Christmas", "Adam Kay"), Client(12, "Mohamed Salah"), datetime.date(2019, 11, 9), None))
     repoRental.add(Rental(7, Book(7, "The Tales of Beedle the Bard", "J K Rowling"), Client(4, "Virgil Van Dijk"), datetime.date(2019, 11, 15), None))
     repoRental.add(Rental(8, Book(8, "This is Going to Hurt", "Adam Kay"), Client(80, "Luuk De Jong"), datetime.date(2019, 11, 17), None))
-    """
+  
     c = Console(Srv, validatorInteger, validatorDate)
     c.run()
     
