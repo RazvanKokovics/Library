@@ -1,4 +1,4 @@
-# Library
+# Library Management System
 A Library management system implementation in Python using OOP and Layered Architecture.
 
 It has 5 types of repository:
